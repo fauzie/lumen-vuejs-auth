@@ -23,10 +23,7 @@ testing:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - yarn install --ignore-optional --non-interactive
     - npm run production
-    - php artisan --env=testing config:cache
-    - php artisan --env=testing route:cache
-    - php artisan --env=testing view:cache
     - php artisan --env=testing migrate:refresh --seed
     - php artisan --env=testing swagger-lume:generate
-    - php artisan --env=testing serve &
+    - php -S localhost:8000 -t public &
     - php vendor/bin/phpunit -v --coverage-text --colors=never --stderr
