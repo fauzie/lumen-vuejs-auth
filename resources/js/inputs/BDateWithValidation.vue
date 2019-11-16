@@ -10,7 +10,7 @@
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
         >
-            <b-input v-model="innerValue" v-bind="$attrs"></b-input>
+            <b-datepicker v-model="innerValue" :max-date="maxDate" v-bind="$attrs"></b-datepicker>
         </b-field>
         <p>&nbsp;</p>
     </ValidationProvider>
@@ -21,6 +21,10 @@ export default {
     props: {
         vid: {
             type: String
+        },
+        maxDate: {
+            type: Date,
+            default: new Date(8640000000000000)
         },
         rules: {
             type: [Object, String],
@@ -38,7 +42,7 @@ export default {
             this.$emit('input', newVal)
         },
         value(newVal) {
-            this.innerValue = newVal
+            this.innerValue = (newVal && !(newVal instanceof Date)) ? new Date(newVal) : newVal
         }
     },
     created() {

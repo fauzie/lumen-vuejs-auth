@@ -21,7 +21,7 @@
                         <validation-observer ref="observer" v-slot="{ invalid }" tag="form" @submit.prevent="submitLogin">
                             <b-input-with-validation
                                 icon="at"
-                                rules="required|email"
+                                rules="required|email|emailexists"
                                 type="email"
                                 name="email"
                                 label="Email"

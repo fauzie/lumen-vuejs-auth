@@ -23,7 +23,7 @@ return [
         | Route for accessing parsed swagger annotations.
         |--------------------------------------------------------------------------
          */
-        'docs' => '/api/docs',
+        'docs' => '/api/swagger',
 
         /*
         |--------------------------------------------------------------------------
@@ -79,7 +79,11 @@ return [
         | Absolute path to directories that you would like to exclude from swagger generation
         |--------------------------------------------------------------------------
          */
-        'excludes' => [],
+        'excludes' => [
+            'Console',
+            'Exceptions',
+            'Providers',
+        ],
 
         /*
         |--------------------------------------------------------------------------
@@ -109,11 +113,10 @@ return [
         */
 
         'Authorization' => [
-            'type' => 'apiKey',
+            'type' => 'http',
             'description' => 'API Access Authorization',
             'name' => 'Authorization',
-            'in' => 'header',
-            'securityDefinition' => 'Bearer'
+            'scheme' => 'bearer'
         ]
     ],
 

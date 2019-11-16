@@ -26,7 +26,7 @@ class AuthController extends Controller
      *     path="/api/register",
      *     operationId="/register",
      *     description="User Registration",
-     *     tags={"auth"},
+     *     tags={"Authentication"},
      *     @OA\RequestBody(
      *         description="User details to registered",
      *         required=true,
@@ -64,9 +64,9 @@ class AuthController extends Controller
             'firstname' => 'bail|required|min:3',
             'lastname'  => 'nullable|min:3',
             'email'     => 'bail|required|email:filter,rfc,dns|unique:users',
-            'phone'     => 'nullable|numeric|between:8,16',
+            'phone'     => 'required|digits_between:10,13',
             'password'  => 'bail|required|alpha_num|min:4',
-            'dob'       => 'nullable|before:'.\strtotime('now'),
+            'dob'       => 'nullable|before:'.date('Y', strtotime('-1 year')),
             'gender'    => 'required|in:male,female'
         ]);
 
@@ -81,17 +81,15 @@ class AuthController extends Controller
         ]);
         $data['password'] = $hash;
 
-        //return \response()->json($data);
-
         if (User::create($data)) {
             $result = [
-                'success' => true,
-                'code'    => 201
+                'status' => true,
+                'code'   => 201
             ];
         } else {
             $result = [
-                'success' => false,
-                'code'    => 404
+                'status' => false,
+                'code'   => 404
             ];
         }
 
@@ -106,7 +104,7 @@ class AuthController extends Controller
      *     path="/api/login",
      *     operationId="/login",
      *     description="Authenticate User",
-     *     tags={"auth"},
+     *     tags={"Authentication"},
      *     @OA\Parameter(
      *         name="email",
      *         in="query",
@@ -183,8 +181,8 @@ class AuthController extends Controller
      *     path="/api/logout",
      *     operationId="/logout",
      *     description="User Logout",
-     *     security="Authorization",
-     *     tags={"auth"},
+     *     security={"Authorization"},
+     *     tags={"Logged In"},
      *     @OA\Response(
      *         response=200,
      *         description="Success or failure user logged out from status property.",
@@ -213,11 +211,18 @@ class AuthController extends Controller
     /**
      * Check if email exists.
      *
-     * @OA\Get(
+     * @OA\Post(
      *     path="/api/exists",
      *     operationId="/exists",
      *     description="Check if email is exists",
-     *     tags={"auth"},
+     *     tags={"Utilities"},
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Valid email address",
+     *         required=true,
+     *         @OA\Schema(type="string",minimum=6)
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Email exists status from status property.",
@@ -243,11 +248,18 @@ class AuthController extends Controller
     /**
      * Check if email unique.
      *
-     * @OA\Get(
+     * @OA\Post(
      *     path="/api/unique",
      *     operationId="/unique",
      *     description="Check if email is unique",
-     *     tags={"auth"},
+     *     tags={"Utilities"},
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Valid email address",
+     *         required=true,
+     *         @OA\Schema(type="string",minimum=6)
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Email unique status from status property.",

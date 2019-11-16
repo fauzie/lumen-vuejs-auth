@@ -24,8 +24,8 @@ class UserController extends Controller
      *     path="/api/user",
      *     operationId="/user",
      *     description="Get User Details",
-     *     security="Authorization",
-     *     tags={"user"},
+     *     security={"Authorization"},
+     *     tags={"Logged In"},
      *     @OA\Response(
      *         response=200,
      *         description="Success fetching user data object.",

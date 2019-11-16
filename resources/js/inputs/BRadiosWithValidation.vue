@@ -1,6 +1,6 @@
 <template>
-    <ValidationProvider :vid="vid" :name="$attrs.label" :rules="rules" v-slot="{ errors }">
-        <div class="block">
+    <ValidationProvider :vid="vid" :name="$attrs.name || $attrs.label" :rules="rules" v-slot="{ errors }">
+        <div class="block has-text-left">
             <slot/>
             <p class="has-text-danger">{{ errors[0] }}</p>
         </div>

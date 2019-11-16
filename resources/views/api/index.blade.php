@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>{{config('swagger-lume.api.title')}}</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ swagger_lume_asset('swagger-ui.css') }}" >
-    <link rel="icon" type="image/png" href="{{ swagger_lume_asset('favicon-32x32.png') }}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{ swagger_lume_asset('favicon-16x16.png') }}" sizes="16x16" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
     <style>
         html
         {

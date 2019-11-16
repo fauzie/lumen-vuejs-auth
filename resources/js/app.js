@@ -11,8 +11,7 @@ Vue.use(Buefy, {
     defaultNotificationDuration: 3000,
     defaultFieldLabelPosition: 'on-border'
 })
-Vue.config.productionTip = process.env.NODE_ENV === 'production'
-
+Vue.config.productionTip = true
 Vue.prototype.$http = http
 
 new Vue({

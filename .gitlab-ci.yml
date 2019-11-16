@@ -15,7 +15,7 @@ testing:
       - storage/framework/cache
 
   variables:
-    DB_HOST: mysql
+    DB_HOST: localhost
     MYSQL_DATABASE: "apitestdb"
     MYSQL_ROOT_PASSWORD: "apitestpw"
 
