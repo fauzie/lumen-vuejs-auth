@@ -24,7 +24,7 @@ install:
   - composer install --prefer-dist --no-ansi --no-interaction --no-progress
   - yarn install --ignore-optional --non-interactive
   - npm run production
-  - php artisan --env=testing migrate:refresh --seed
+  - php artisan --env=testing migrate:refresh --force
   - php artisan --env=testing swagger-lume:generate
   - php -S localhost:8000 -t public &
 
