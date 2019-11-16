@@ -1,0 +1,9 @@
+/vendor
+/node_modules
+/.idea
+/.vscode
+/localtest.sh
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache

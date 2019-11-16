@@ -1,0 +1,32 @@
+stages:
+  - testing
+
+testing:
+  image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+  stage: testing
+  services:
+    - mysql:5.7
+
+  cache:
+    key: $CI_BUILD_REF_NAME
+    paths:
+      - node_modules
+      - vendor
+      - storage/framework/cache
+
+  variables:
+    DB_HOST: mysql
+    MYSQL_DATABASE: "apitestdb"
+    MYSQL_ROOT_PASSWORD: "apitestpw"
+
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - npm install --no-optional --no-shrinkwrap --no-package-lock
+    - npm run production
+    - php artisan --env=testing config:cache
+    - php artisan --env=testing route:cache
+    - php artisan --env=testing view:cache
+    - php artisan --env=testing migrate:refresh --seed
+    - php artisan --env=testing swagger-lume:generate
+    - php artisan --env=testing serve &
+    - php vendor/bin/phpunit -v --coverage-text --colors=never --stderr
