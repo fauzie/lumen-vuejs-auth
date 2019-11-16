@@ -1,4 +1,4 @@
-dist: precise
+dist: xenial
 
 language: php
 
@@ -9,19 +9,20 @@ addons:
   mariadb: 10.4
 
 cache:
+  yarn: true
   directories:
     - node_modules
     - vendor
 
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install nodejs
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq nodejs yarn
   - sudo mysql -e 'CREATE DATABASE apitestdb;'
   - composer self-update
 
 install:
   - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-  - npm install --no-optional --no-shrinkwrap --no-package-lock
+  - yarn install --flat --prod --ignore-optional --non-interactive
   - npm run production
   - php artisan --env=testing config:cache
   - php artisan --env=testing route:cache
