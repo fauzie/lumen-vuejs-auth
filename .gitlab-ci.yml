@@ -21,7 +21,7 @@ testing:
 
   script:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-    - yarn install --flat --ignore-optional --non-interactive
+    - yarn install --ignore-optional --non-interactive
     - npm run production
     - php artisan --env=testing config:cache
     - php artisan --env=testing route:cache

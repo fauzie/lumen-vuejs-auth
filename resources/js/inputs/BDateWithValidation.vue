@@ -42,7 +42,7 @@ export default {
             this.$emit('input', newVal)
         },
         value(newVal) {
-            this.innerValue = (newVal && !(newVal instanceof Date)) ? new Date(newVal) : newVal
+            this.innerValue = (newVal && !(newVal instanceof Date)) ? new Date(Date.parse(newVal)) : newVal
         }
     },
     created() {

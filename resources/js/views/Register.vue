@@ -199,9 +199,9 @@ export default {
             const isValid = await this.$refs.observer.validate()
 
             if (isValid) {
-                let formData = this.form
-                formData.phone = this.form.phone.replace(/\s+/g, '')
-                formData.dob = this.dobFormat(this.form.dob)
+                let formData = { ...this.form }
+                formData.phone = formData.phone.replace(/\s+/g, '')
+                formData.dob = this.dobFormat(formData.dob)
                 await this.$http.put('register', formData).then(response => {
                     if (response.data && response.data.status) {
                         this.isSuccess = true
@@ -226,10 +226,11 @@ export default {
         dobFormat(value) {
             try {
                 const date = (value instanceof Date) ? value : new Date(value)
-                if (date)
+                if (date) {
                     return date.getFullYear()+'-'+
                         ('0' + (date.getMonth()+1)).slice(-2)+'-'+
                         ('0' + date.getDate()).slice(-2)
+                }
             } catch (error) {}
             return ''
         }
